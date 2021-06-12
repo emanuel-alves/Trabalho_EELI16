@@ -122,3 +122,64 @@ RMPUB_1 = RM_1/(VNBT_1^2/SN_1)
 XMPUB_1 = XM_1/(VNBT_1^2/SN_1)
 R1TSPUB_1 = R1TS_1/(VNAT_1^2/SN_1)
 X1SPUB_1 = X1S_1/(VNAT_1^2/SN_1)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 4 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+phi = acos(fp)
+
+IPU_1 = 0:0.05:1
+
+RegPU_1_1 = IPU_1.*(cos(phi(1)).*R1STPU_1 + sin(phi(1)).*X1SPU_1)
+RegPU_1_2 = IPU_1.*(cos(phi(2)).*R1STPU_1 + sin(phi(2)).*X1SPU_1)
+RegPU_1_3 = IPU_1.*(cos(phi(3)).*R1STPU_1 + sin(phi(3)).*X1SPU_1)
+RegPU_1_4 = IPU_1.*(cos(phi(4)).*R1STPU_1 + sin(phi(4)).*X1SPU_1)
+
+figure
+plot(IPU_1,RegPU_1_1,IPU_1,RegPU_1_2,IPU_1,RegPU_1_3,IPU_1,RegPU_1_4)
+title('Regulação de tensão | Carga indutiva-resistiva')
+ylabel('Reg_{PU}')
+xlabel('I_{PU}')
+legend('fp = 0.8','fp = 0.85','fp = 0.9','fp = 0.95')
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 5 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+phi = acos(fp)
+
+IPU_1 = 0:0.05:1
+
+
+RegPU_1_1 = IPU_1.*(cos(phi(1)).*R1STPU_1 - sin(phi(1)).*X1SPU_1)
+RegPU_1_2 = IPU_1.*(cos(phi(2)).*R1STPU_1 - sin(phi(2)).*X1SPU_1)
+RegPU_1_3 = IPU_1.*(cos(phi(3)).*R1STPU_1 - sin(phi(3)).*X1SPU_1)
+RegPU_1_4 = IPU_1.*(cos(phi(4)).*R1STPU_1 - sin(phi(4)).*X1SPU_1)
+figure
+plot(IPU_1,RegPU_1_1,IPU_1,RegPU_1_2,IPU_1,RegPU_1_3,IPU_1,RegPU_1_4)
+title('Regulação de tensão | Carga capacitiva-resistiva')
+ylabel('Reg_{PU}')
+xlabel('I_{PU}')
+legend('fp = 0.8','fp = 0.85','fp = 0.9','fp = 0.95')
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 6 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+phi = acos(fp)
+
+IPU_1 = 0:0.05:1
+
+RegPU_1_1 = IPU_1.*R1STPU_1
+
+figure
+plot(IPU_1,RegPU_1_1)
+title('Regulação de tensão | Carga resistiva')
+ylabel('Reg_{PU}')
+xlabel('I_{PU}')
+legend('fp = 1')
