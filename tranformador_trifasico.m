@@ -1,5 +1,18 @@
-function [saidas] = tranformador_trifasico(SN_3, VNBT_3, VNBT_3, V0_3, I0_3, P0_3, Vcc_3, Icc_3, Pcc_3,  isPlot, isSalve, pathSave)
+function [saidas] = tranformador_trifasico(SN_3, VNAT_3, VNBT_3, V0_3, I0_3, P0_3, Vcc_3, Icc_3, Pcc_3,  isPlot, isSalve, pathSave)
 
+if isSalve
+    pathSave = uigetdir('','Selecione o diretório para salvar os dados');
+end
+
+SN_3 = 45e3
+VNAT_3 = 23.1e3
+VNBT_3 = 380
+V0_3 = 380
+I0_3 = 2.46
+P0_3 = 215
+Vcc_3	= 900.90
+Icc_3 = 1.12
+Pcc_3 = 704.52
 T_3 = 75 % nao dado
 
 % Topico 2 %
@@ -110,5 +123,155 @@ R1STPU_3
 X1SPUB_3 = X1S_3/(VNAT_3^2/SN_3)
 X1SPU_3
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 4 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+phi = acos(fp)
+
+IPU_3 = 0:0.05:1
+
+RegPU_I3_1 = IPU_3.*(cos(phi(1))*R1STPU_3 + sin(phi(1))*X1SPU_3)
+RegPU_I3_2 = IPU_3.*(cos(phi(2))*R1STPU_3 + sin(phi(2))*X1SPU_3)
+RegPU_I3_3 = IPU_3.*(cos(phi(3))*R1STPU_3 + sin(phi(3))*X1SPU_3)
+RegPU_I3_4 = IPU_3.*(cos(phi(4))*R1STPU_3 + sin(phi(4))*X1SPU_3)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 5 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+phi = acos(fp)
+
+IPU_3 = 0:0.05:1
+
+
+RegPU_C3_1 = IPU_3.*(cos(phi(1))*R1STPU_3 - sin(phi(1))*X1SPU_3)
+RegPU_C3_2 = IPU_3.*(cos(phi(2))*R1STPU_3 - sin(phi(2))*X1SPU_3)
+RegPU_C3_3 = IPU_3.*(cos(phi(3))*R1STPU_3 - sin(phi(3))*X1SPU_3)
+RegPU_C3_4 = IPU_3.*(cos(phi(4))*R1STPU_3 - sin(phi(4))*X1SPU_3)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 6 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+phi = acos(fp)
+
+IPU_3 = 0:0.05:1
+
+RegPU_R3_1 = IPU_3.*R1STPU_3
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 7 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+IPU_3 = 0:0.05:1
+
+RendPC_3_1 = (1.*IPU_3*fp(1)*SN_3)./(1.*IPU_3*fp(1)*SN_3 + P0_3 + R1STPU_3.*IPU_3.^2*SN_3)*100
+RendPC_3_2 = (1.*IPU_3*fp(2)*SN_3)./(1.*IPU_3*fp(2)*SN_3 + P0_3 + R1STPU_3.*IPU_3.^2*SN_3)*100
+RendPC_3_3 = (1.*IPU_3*fp(3)*SN_3)./(1.*IPU_3*fp(3)*SN_3 + P0_3 + R1STPU_3.*IPU_3.^2*SN_3)*100
+RendPC_3_4 = (1.*IPU_3*fp(4)*SN_3)./(1.*IPU_3*fp(4)*SN_3 + P0_3 + R1STPU_3.*IPU_3.^2*SN_3)*100
+RendPC_3_5 = (1.*IPU_3*SN_3)./(1.*IPU_3*SN_3 + P0_3+ R1STPU_3.*IPU_3.^2*SN_3)*100
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 8 %
+
+IMAX_3 = sqrt(P0_3/Pcc_3)
+
+RendMPC_3_1 = (1.*IMAX_3*fp(1)*SN_3)./(1.*IMAX_3*fp(1)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
+RendMPC_3_2 = (1.*IMAX_3*fp(2)*SN_3)./(1.*IMAX_3*fp(2)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
+RendMPC_3_3 = (1.*IMAX_3*fp(3)*SN_3)./(1.*IMAX_3*fp(3)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
+RendMPC_3_4 = (1.*IMAX_3*fp(4)*SN_3)./(1.*IMAX_3*fp(4)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
+RendMPC_3_5 = (1.*IMAX_3*SN_3)./(1.*IMAX_3*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Graficos%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+if isPlot
+    figure('units','normalized','outerposition',[0 0 1 1]);
+    % Topico 4
+    subplot(2,2,1)
+    plot(IPU_3,RegPU_I3_1,IPU_3,RegPU_I3_2,IPU_3,RegPU_I3_3,IPU_3,RegPU_I3_4)
+    grid on
+    title('Regulação de tensão | Carga indutiva-resistiva')
+    ylabel('Reg_{PU}')
+    xlabel('I_{PU}')
+    legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
+    
+    % Topico 5
+    subplot(2,2,2)
+    plot(IPU_3,RegPU_C3_1,IPU_3,RegPU_C3_2,IPU_3,RegPU_C3_3,IPU_3,RegPU_C3_4)
+    grid on
+    title('Regulação de tensão | Carga capacitiva-resistiva')
+    ylabel('Reg_{PU}')
+    xlabel('I_{PU}')
+    legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
+    
+    % Topico 6
+    subplot(2,2,3)
+    plot(IPU_3,RegPU_R3_1)
+    grid on
+    title('Regulação de tensão | Carga resistiva')
+    ylabel('Reg_{PU}')
+    xlabel('I_{PU}')
+    legend('fp = 1')
+    
+    
+    % Topico 7
+    subplot(2,2,4)
+    plot(IPU_3,RendPC_3_1,IPU_3,RendPC_3_2,IPU_3,RendPC_3_3,IPU_3,RendPC_3_4,IPU_3,RendPC_3_5)
+    grid on
+    title('Rendimento em função do carregamento | Carga indutiva-resistiva')
+    ylabel('Rendimento (%)')
+    xlabel('I_{PU}')
+    axis([0 1 97 100])
+    legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado','fp = 1')
+    
+end
+if isSalve
+    % Topico 4
+    f = figure('visible','off');
+    plot(IPU_3,RegPU_I3_1,IPU_3,RegPU_I3_2,IPU_3,RegPU_I3_3,IPU_3,RegPU_I3_4)
+    grid on
+    title('Regulação de tensão | Carga indutiva-resistiva')
+    ylabel('Reg_{PU}')
+    xlabel('I_{PU}')
+    legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoIndutivaResitiva'),'png')
+    
+    % Topico 5
+    f = figure('visible','off');
+    plot(IPU_3,RegPU_C3_1,IPU_3,RegPU_C3_2,IPU_3,RegPU_C3_3,IPU_3,RegPU_C3_4)
+    grid on
+    title('Regulação de tensão | Carga capacitiva-resistiva')
+    ylabel('Reg_{PU}')
+    xlabel('I_{PU}')
+    legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoCapacitivaResitiva'),'png')
+    
+    % Topico 6
+    f = figure('visible','off');
+    plot(IPU_3,RegPU_R3_1)
+    grid on
+    title('Regulação de tensão | Carga resistiva')
+    ylabel('Reg_{PU}')
+    xlabel('I_{PU}')
+    legend('fp = 1')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoResitiva'),'png')
+    
+    % Topico 7
+    f = figure('visible','off');
+    plot(IPU_3,RendPC_3_1,IPU_3,RendPC_3_2,IPU_3,RendPC_3_3,IPU_3,RendPC_3_4,IPU_3,RendPC_3_5)
+    grid on
+    title('Rendimento em função do carregamento | Carga indutiva-resistiva')
+    ylabel('Rendimento (%)')
+    xlabel('I_{PU}')
+    axis([0 1 97 100])
+    legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado','fp = 1')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_rendimentoIndutivaResistiva'),'png')
+    
+end
 end
 

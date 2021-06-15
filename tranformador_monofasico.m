@@ -1,9 +1,23 @@
 function [saidas] = tranformador_monofasico(SN_1,VNAT_1,VNBT_1,V0_1,I0_1,P0_1,Vcc_1,Icc_1,Pcc_1, isPlot, isSalve)
-    T_1 = 75 % nao dado
+T_1 = 75 % nao dado
 
-    if isSalve
-        pathSave = uigetdir('','Selecione o diretório para salvar os dados');
-    end
+if isSalve
+    pathSave = uigetdir('','Selecione o diretório para salvar os dados');
+end
+
+SN_1 = 15e3;
+VNAT_1 = 13.34e3;
+VNBT_1 = 220;
+V0_1 = 220;
+I0_1 = 2.05;
+P0_1 = 75;
+Vcc_1	= 320.16;
+Icc_1 = 1.12;
+Pcc_1 = 243.23;
+
+T_1 = 75 ;% nao dado
+
+
 % Topico 2 %
 %Figura 1%
 
@@ -115,136 +129,151 @@ X1SPU_1
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 4 %
+fp = [0.8 0.85 0.9 0.95];
 
-fp = [0.8 0.85 0.9 0.95]
+phi = acos(fp);
 
-phi = acos(fp)
+IPU_1 = 0:0.05:1;
 
-IPU_1 = 0:0.05:1
-
-RegPU_1_1 = IPU_1.*(cos(phi(1))*R1STPU_1 + sin(phi(1))*X1SPU_1)
-RegPU_1_2 = IPU_1.*(cos(phi(2))*R1STPU_1 + sin(phi(2))*X1SPU_1)
-RegPU_1_3 = IPU_1.*(cos(phi(3))*R1STPU_1 + sin(phi(3))*X1SPU_1)
-RegPU_1_4 = IPU_1.*(cos(phi(4))*R1STPU_1 + sin(phi(4))*X1SPU_1)
+RegPU_I1_1 = IPU_1.*(cos(phi(1))*R1STPU_1 + sin(phi(1))*X1SPU_1);
+RegPU_I1_2 = IPU_1.*(cos(phi(2))*R1STPU_1 + sin(phi(2))*X1SPU_1);
+RegPU_I1_3 = IPU_1.*(cos(phi(3))*R1STPU_1 + sin(phi(3))*X1SPU_1);
+RegPU_I1_4 = IPU_1.*(cos(phi(4))*R1STPU_1 + sin(phi(4))*X1SPU_1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 5 %
 
-fp = [0.8 0.85 0.9 0.95]
+fp = [0.8 0.85 0.9 0.95];
 
-phi = acos(fp)
+phi = acos(fp);
 
-IPU_1 = 0:0.05:1
-
-
-RegPU_1_1 = IPU_1.*(cos(phi(1))*R1STPU_1 - sin(phi(1))*X1SPU_1)
-RegPU_1_2 = IPU_1.*(cos(phi(2))*R1STPU_1 - sin(phi(2))*X1SPU_1)
-RegPU_1_3 = IPU_1.*(cos(phi(3))*R1STPU_1 - sin(phi(3))*X1SPU_1)
-RegPU_1_4 = IPU_1.*(cos(phi(4))*R1STPU_1 - sin(phi(4))*X1SPU_1)
+IPU_1 = 0:0.05:1;
 
 
+RegPU_C1_1 = IPU_1.*(cos(phi(1))*R1STPU_1 - sin(phi(1))*X1SPU_1);
+RegPU_C1_2 = IPU_1.*(cos(phi(2))*R1STPU_1 - sin(phi(2))*X1SPU_1);
+RegPU_C1_3 = IPU_1.*(cos(phi(3))*R1STPU_1 - sin(phi(3))*X1SPU_1);
+RegPU_C1_4 = IPU_1.*(cos(phi(4))*R1STPU_1 - sin(phi(4))*X1SPU_1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 6 %
 
-fp = [0.8 0.85 0.9 0.95]
+fp = [0.8 0.85 0.9 0.95];
 
-phi = acos(fp)
+phi = acos(fp);
 
-IPU_1 = 0:0.05:1
+IPU_1 = 0:0.05:1;
 
-RegPU_1_1 = IPU_1.*R1STPU_1
+RegPU_R1_1 = IPU_1.*R1STPU_1;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 7 %
+
+fp = [0.8 0.85 0.9 0.95];
+
+IPU_1 = 0:0.05:1;
+
+RendPC_1_1 = (1.*IPU_1*fp(1)*SN_1)./(1.*IPU_1*fp(1)*SN_1 + P0_1 + R1STPU_1.*IPU_1.^2*SN_1)*100;
+RendPC_1_2 = (1.*IPU_1*fp(2)*SN_1)./(1.*IPU_1*fp(2)*SN_1 + P0_1 + R1STPU_1.*IPU_1.^2*SN_1)*100;
+RendPC_1_3 = (1.*IPU_1*fp(3)*SN_1)./(1.*IPU_1*fp(3)*SN_1 + P0_1 + R1STPU_1.*IPU_1.^2*SN_1)*100;
+RendPC_1_4 = (1.*IPU_1*fp(4)*SN_1)./(1.*IPU_1*fp(4)*SN_1 + P0_1 + R1STPU_1.*IPU_1.^2*SN_1)*100;
+RendPC_1_5 = (1.*IPU_1*SN_1)./(1.*IPU_1*SN_1 + P0_1 + R1STPU_1.*IPU_1.^2*SN_1)*100;
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 8 %
+
+IMAX_1 = sqrt(P0_1/Pcc_1)
+
+RendMPC_1_1 = (1.*IMAX_1*fp(1)*SN_1)./(1.*IMAX_1*fp(1)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
+RendMPC_1_2 = (1.*IMAX_1*fp(2)*SN_1)./(1.*IMAX_1*fp(2)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
+RendMPC_1_3 = (1.*IMAX_1*fp(3)*SN_1)./(1.*IMAX_1*fp(3)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
+RendMPC_1_4 = (1.*IMAX_1*fp(4)*SN_1)./(1.*IMAX_1*fp(4)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
+RendMPC_1_5 = (1.*IMAX_1*SN_1)./(1.*IMAX_1*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Graficos%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if isPlot
     figure('units','normalized','outerposition',[0 0 1 1]);
-    
-    %%% Topico 4
+    % Topico 4
     subplot(2,2,1)
-    plot(IPU_1,RegPU_1_1,IPU_1,RegPU_1_2,IPU_1,RegPU_1_3,IPU_1,RegPU_1_4)
+    plot(IPU_1,RegPU_I1_1,IPU_1,RegPU_I1_2,IPU_1,RegPU_I1_3,IPU_1,RegPU_I1_4)
     grid on
-    title('Regula��o de tens�o | Carga indutiva-resistiva')
+    title('Regulação de tensão | Carga indutiva-resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
-    legend('fp = 0.8','fp = 0.85','fp = 0.9','fp = 0.95')
+    legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
     
-    %%% Topico 5
-    
+    % Topico 5
     subplot(2,2,2)
-    plot(IPU_1,RegPU_1_1,IPU_1,RegPU_1_2,IPU_1,RegPU_1_3,IPU_1,RegPU_1_4)
+    plot(IPU_1,RegPU_C1_1,IPU_1,RegPU_C1_2,IPU_1,RegPU_C1_3,IPU_1,RegPU_C1_4)
     grid on
-    title('Regula��o de tens�o | Carga capacitiva-resistiva')
+    title('Regulação de tensão | Carga capacitiva-resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
-    legend('fp = 0.8','fp = 0.85','fp = 0.9','fp = 0.95')
+    legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
     
-    %%% Topico 6
-    
-    subplot(2,2,4)
-    plot(IPU_1,RegPU_1_1)
+    % Topico 6
+    subplot(2,2,3)
+    plot(IPU_1,RegPU_R1_1)
     grid on
-    title('Regula��o de tens�o | Carga resistiva')
+    title('Regulação de tensão | Carga resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 1')
-
-
+    
+    % Topico 7
+    subplot(2,2,4)
+    plot(IPU_1,RendPC_1_1,IPU_1,RendPC_1_2,IPU_1,RendPC_1_3,IPU_1,RendPC_1_4,IPU_1,RendPC_1_5)
+    grid on
+    title('Rendimento em função do carregamento | Carga indutiva-resistiva')
+    ylabel('\eta_%')
+    xlabel('I_{PU}')
+    axis([0 1 97 99])
+    legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado','fp = 1')
+    
 end
 if isSalve
+    % Topico 4
     f = figure('visible','off');
-    plot(IPU_1,RegPU_1_1,IPU_1,RegPU_1_2,IPU_1,RegPU_1_3,IPU_1,RegPU_1_4)
+    plot(IPU_1,RegPU_I1_1,IPU_1,RegPU_I1_2,IPU_1,RegPU_I1_3,IPU_1,RegPU_I1_4)
     grid on
-    title('Regula��o de tens�o | Carga indutiva-resistiva')
+    title('Regulação de tensão | Carga indutiva-resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
-    legend('fp = 0.8','fp = 0.85','fp = 0.9','fp = 0.95')
-    saveas(f,  fullfile(pathSave, 'plot_1'),'png')
-
-    %%% Topico 5
+    legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
+    saveas(f,  fullfile(pathSave, 'plotMonofasico_regulacaoIndutivaResitiva'),'png')
     
+    % Topico 5
     f = figure('visible','off');
-    plot(IPU_1,RegPU_1_1,IPU_1,RegPU_1_2,IPU_1,RegPU_1_3,IPU_1,RegPU_1_4)
+    plot(IPU_1,RegPU_C1_1,IPU_1,RegPU_C1_2,IPU_1,RegPU_C1_3,IPU_1,RegPU_C1_4)
     grid on
-    title('Regula��o de tens�o | Carga capacitiva-resistiva')
+    title('Regulação de tensão | Carga capacitiva-resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
-    legend('fp = 0.8','fp = 0.85','fp = 0.9','fp = 0.95')
-    saveas(f,  fullfile(pathSave, 'plot_2'),'png')
-
-
-    %%%
+    legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
+    saveas(f,  fullfile(pathSave, 'plotMonofasico_regulacaoCapacitivaResitiva'),'png')
     
-    % Plotagem da regula��o de tens�o
+    % Topico 6
     f = figure('visible','off');
-    %figure('Name','Regula��o de tensao para carregamentos resistivo-capacitivos','NumberTitle','off','Position',[500 100 800 600])
-    plot(amps,I(1,:),'b');
-    hold on;
-    plot(amps,I(2,:),'k');
-    plot(amps,I(3,:),'r');
-    plot(amps,I(4,:),'m');
-    
-    grid on;
-    title ('Regula��o de Tens�o Versus Carga (resistivo-capacitivo)');
-    xlabel ('Caregamento(A)');
-    ylabel ('Regula��o de Tens�o (%)');
-    legend({'FP 0,8 adiantado','FP 0,85 adiantado','FP 0,9 adiantado', 'FP 0,95 adiantado'},'Location','best');
-    hold off;
-    saveas(f,  fullfile(pathSave, 'plot_3'),'png')
-
-
-    
-    %%% Topico 6
-    
-    
-    f = figure('visible','off');
-    plot(IPU_1,RegPU_1_1)
+    plot(IPU_1,RegPU_R1_1)
     grid on
-    title('Regula��o de tens�o | Carga resistiva')
+    title('Regulação de tensão | Carga resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 1')
-    saveas(f,  fullfile(pathSave, 'plot_4'),'png')
-
-
+    saveas(f,  fullfile(pathSave, 'plotMonofasico_regulacaoResitiva'),'png')
+    
+    % Topico 7
+    f = figure('visible','off');
+    plot(IPU_1,RendPC_1_1,IPU_1,RendPC_1_2,IPU_1,RendPC_1_3,IPU_1,RendPC_1_4,IPU_1,RendPC_1_5)
+    grid on
+    title('Rendimento em função do carregamento | Carga indutiva-resistiva')
+    ylabel('\eta_%')
+    xlabel('I_{PU}')
+    axis([0 1 97 99])
+    saveas(f,  fullfile(pathSave, 'plotMonofasico_rendimentoIndutivaResistiva'),'png')
+    
 end
 end

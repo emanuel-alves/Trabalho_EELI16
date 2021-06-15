@@ -1,7 +1,7 @@
 % Trabalho 1 -- Maquinas Eletricas I %
 % Codigo base de calculos %
 
-clc, close all, clear all;
+%clc, close all, clear all;
 
 % Parametros lidos %
 % Trifásico %
