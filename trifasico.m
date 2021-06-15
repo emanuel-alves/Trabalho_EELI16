@@ -189,3 +189,38 @@ title('Regulação de tensão | Carga resistiva')
 ylabel('Reg_{PU}')
 xlabel('I_{PU}')
 legend('fp = 1')
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 7 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+IPU_3 = 0:0.05:1
+
+RendPC_3_1 = (1.*IPU_3*fp(1)*SN_3)./(1.*IPU_3*fp(1)*SN_3 + P0_3 + R1STPU_3.*IPU_3.^2*SN_3)*100
+RendPC_3_2 = (1.*IPU_3*fp(2)*SN_3)./(1.*IPU_3*fp(2)*SN_3 + P0_3 + R1STPU_3.*IPU_3.^2*SN_3)*100
+RendPC_3_3 = (1.*IPU_3*fp(3)*SN_3)./(1.*IPU_3*fp(3)*SN_3 + P0_3 + R1STPU_3.*IPU_3.^2*SN_3)*100
+RendPC_3_4 = (1.*IPU_3*fp(4)*SN_3)./(1.*IPU_3*fp(4)*SN_3 + P0_3 + R1STPU_3.*IPU_3.^2*SN_3)*100
+RendPC_3_5 = (1.*IPU_3*SN_3)./(1.*IPU_3*SN_3 + P0_3+ R1STPU_3.*IPU_3.^2*SN_3)*100
+ 
+subplot(2,2,4)
+plot(IPU_3,RendPC_3_1,IPU_3,RendPC_3_2,IPU_3,RendPC_3_3,IPU_3,RendPC_3_4,IPU_3,RendPC_3_5)
+grid on
+title('Rendimento em função do carregamento | Carga indutiva-resistiva')
+ylabel('Rendimento (%)')
+xlabel('I_{PU}')
+axis([0 1 97 100])
+legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado','fp = 1')
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 8 %
+
+IMAX_3 = sqrt(P0_3/Pcc_3)
+
+RendMPC_3_1 = (1.*IMAX_3*fp(1)*SN_3)./(1.*IMAX_3*fp(1)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
+RendMPC_3_2 = (1.*IMAX_3*fp(2)*SN_3)./(1.*IMAX_3*fp(2)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
+RendMPC_3_3 = (1.*IMAX_3*fp(3)*SN_3)./(1.*IMAX_3*fp(3)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
+RendMPC_3_4 = (1.*IMAX_3*fp(4)*SN_3)./(1.*IMAX_3*fp(4)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
+RendMPC_3_5 = (1.*IMAX_3*SN_3)./(1.*IMAX_3*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
