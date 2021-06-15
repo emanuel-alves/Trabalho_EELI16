@@ -124,3 +124,68 @@ R1TSPUB_3 = R1TS_3/(VNAT_3^2/SN_3)
 R1STPU_3
 X1SPUB_3 = X1S_3/(VNAT_3^2/SN_3)
 X1SPU_3
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 4 %
+
+figure('units','normalized','outerposition',[0 0 1 1]);
+
+fp = [0.8 0.85 0.9 0.95]
+
+phi = acos(fp)
+
+IPU_3 = 0:0.05:1
+
+RegPU_3_1 = IPU_3.*(cos(phi(1))*R1STPU_3 + sin(phi(1))*X1SPU_3)
+RegPU_3_2 = IPU_3.*(cos(phi(2))*R1STPU_3 + sin(phi(2))*X1SPU_3)
+RegPU_3_3 = IPU_3.*(cos(phi(3))*R1STPU_3 + sin(phi(3))*X1SPU_3)
+RegPU_3_4 = IPU_3.*(cos(phi(4))*R1STPU_3 + sin(phi(4))*X1SPU_3)
+
+subplot(2,2,1)
+plot(IPU_3,RegPU_3_1,IPU_3,RegPU_3_2,IPU_3,RegPU_3_3,IPU_3,RegPU_3_4)
+grid on
+title('Regulação de tensão | Carga indutiva-resistiva')
+ylabel('Reg_{PU}')
+xlabel('I_{PU}')
+legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 5 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+phi = acos(fp)
+
+IPU_3 = 0:0.05:1
+
+
+RegPU_3_1 = IPU_3.*(cos(phi(1))*R1STPU_3 - sin(phi(1))*X1SPU_3)
+RegPU_3_2 = IPU_3.*(cos(phi(2))*R1STPU_3 - sin(phi(2))*X1SPU_3)
+RegPU_3_3 = IPU_3.*(cos(phi(3))*R1STPU_3 - sin(phi(3))*X1SPU_3)
+RegPU_3_4 = IPU_3.*(cos(phi(4))*R1STPU_3 - sin(phi(4))*X1SPU_3)
+subplot(2,2,2)
+plot(IPU_3,RegPU_3_1,IPU_3,RegPU_3_2,IPU_3,RegPU_3_3,IPU_3,RegPU_3_4)
+grid on
+title('Regulação de tensão | Carga capacitiva-resistiva')
+ylabel('Reg_{PU}')
+xlabel('I_{PU}')
+legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 6 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+phi = acos(fp)
+
+IPU_3 = 0:0.05:1
+
+RegPU_3_1 = IPU_3.*R1STPU_3
+
+subplot(2,2,3)
+plot(IPU_3,RegPU_3_1)
+grid on
+title('Regulação de tensão | Carga resistiva')
+ylabel('Reg_{PU}')
+xlabel('I_{PU}')
+legend('fp = 1')

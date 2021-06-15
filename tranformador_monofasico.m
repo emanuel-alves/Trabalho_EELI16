@@ -137,20 +137,12 @@ phi = acos(fp)
 IPU_1 = 0:0.05:1
 
 
-RegPU_1_1 = IPU_1.*(cos(phi(1))*R1STPU_1 - sin(phi(1))*X1SPU_1*100)
-RegPU_1_2 = IPU_1.*(cos(phi(2))*R1STPU_1 - sin(phi(2))*X1SPU_1*100)
-RegPU_1_3 = IPU_1.*(cos(phi(3))*R1STPU_1 - sin(phi(3))*X1SPU_1*100)
-RegPU_1_4 = IPU_1.*(cos(phi(4))*R1STPU_1 - sin(phi(4))*X1SPU_1*100)
+RegPU_1_1 = IPU_1.*(cos(phi(1))*R1STPU_1 - sin(phi(1))*X1SPU_1)
+RegPU_1_2 = IPU_1.*(cos(phi(2))*R1STPU_1 - sin(phi(2))*X1SPU_1)
+RegPU_1_3 = IPU_1.*(cos(phi(3))*R1STPU_1 - sin(phi(3))*X1SPU_1)
+RegPU_1_4 = IPU_1.*(cos(phi(4))*R1STPU_1 - sin(phi(4))*X1SPU_1)
 
 
-amps = 0:0.05:1; % Valores de corrente(A)[pu]
-
-% Capacitiva (-)
-
-I(1,:) = amps.*(0.8*R1STPU_1 - X1SPU_1*sind(acosd(0.8))*100);
-I(2,:) = amps.*(0.85*R1STPU_1 - X1SPU_1*sind(acosd(0.85))*100);
-I(3,:) = amps.*(0.9*R1STPU_1 - X1SPU_1*sind(acosd(0.9))*100);
-I(4,:) = amps.*(0.95*R1STPU_1 - X1SPU_1*sind(acosd(0.95))*100);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 6 %
@@ -185,25 +177,6 @@ if isPlot
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8','fp = 0.85','fp = 0.9','fp = 0.95')
-    
-    %%%
-    
-    % Plotagem da regula��o de tens�o
-    subplot(2,2,3)
-    %figure('Name','Regula��o de tensao para carregamentos resistivo-capacitivos','NumberTitle','off','Position',[500 100 800 600])
-    plot(amps,I(1,:),'b');
-    hold on;
-    plot(amps,I(2,:),'k');
-    plot(amps,I(3,:),'r');
-    plot(amps,I(4,:),'m');
-    
-    grid on;
-    title ('Regula��o de Tens�o Versus Carga (resistivo-capacitivo)');
-    xlabel ('Caregamento(A)');
-    ylabel ('Regula��o de Tens�o (%)');
-    legend({'FP 0,8 adiantado','FP 0,85 adiantado','FP 0,9 adiantado', 'FP 0,95 adiantado'},'Location','best');
-    hold off;
-    
     
     %%% Topico 6
     

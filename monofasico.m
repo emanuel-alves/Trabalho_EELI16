@@ -131,6 +131,8 @@ X1SPU_1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 4 %
 
+figure('units','normalized','outerposition',[0 0 1 1]);
+
 fp = [0.8 0.85 0.9 0.95]
 
 phi = acos(fp)
@@ -142,13 +144,13 @@ RegPU_1_2 = IPU_1.*(cos(phi(2))*R1STPU_1 + sin(phi(2))*X1SPU_1)
 RegPU_1_3 = IPU_1.*(cos(phi(3))*R1STPU_1 + sin(phi(3))*X1SPU_1)
 RegPU_1_4 = IPU_1.*(cos(phi(4))*R1STPU_1 + sin(phi(4))*X1SPU_1)
 
-figure
+subplot(2,2,1)
 plot(IPU_1,RegPU_1_1,IPU_1,RegPU_1_2,IPU_1,RegPU_1_3,IPU_1,RegPU_1_4)
 grid on
 title('Regulação de tensão | Carga indutiva-resistiva')
 ylabel('Reg_{PU}')
 xlabel('I_{PU}')
-legend('fp = 0.8','fp = 0.85','fp = 0.9','fp = 0.95')
+legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 5 %
@@ -160,41 +162,19 @@ phi = acos(fp)
 IPU_1 = 0:0.05:1
 
 
-RegPU_1_1 = IPU_1.*(cos(phi(1))*R1STPU_1 - sin(phi(1))*X1SPU_1*100)
-RegPU_1_2 = IPU_1.*(cos(phi(2))*R1STPU_1 - sin(phi(2))*X1SPU_1*100)
-RegPU_1_3 = IPU_1.*(cos(phi(3))*R1STPU_1 - sin(phi(3))*X1SPU_1*100)
-RegPU_1_4 = IPU_1.*(cos(phi(4))*R1STPU_1 - sin(phi(4))*X1SPU_1*100)
-figure
+RegPU_1_1 = IPU_1.*(cos(phi(1))*R1STPU_1 - sin(phi(1))*X1SPU_1)
+RegPU_1_2 = IPU_1.*(cos(phi(2))*R1STPU_1 - sin(phi(2))*X1SPU_1)
+RegPU_1_3 = IPU_1.*(cos(phi(3))*R1STPU_1 - sin(phi(3))*X1SPU_1)
+RegPU_1_4 = IPU_1.*(cos(phi(4))*R1STPU_1 - sin(phi(4))*X1SPU_1)
+
+subplot(2,2,2)
 plot(IPU_1,RegPU_1_1,IPU_1,RegPU_1_2,IPU_1,RegPU_1_3,IPU_1,RegPU_1_4)
 grid on
 title('Regulação de tensão | Carga capacitiva-resistiva')
 ylabel('Reg_{PU}')
 xlabel('I_{PU}')
-legend('fp = 0.8','fp = 0.85','fp = 0.9','fp = 0.95')
+legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
 
-amps = 0:0.05:1; % Valores de corrente(A)[pu]
-    
-    % Capacitiva (-)
-
-    I(1,:) = amps.*(0.8*R1STPU_1 - X1SPU_1*sind(acosd(0.8))*100);
-    I(2,:) = amps.*(0.85*R1STPU_1 - X1SPU_1*sind(acosd(0.85))*100);
-    I(3,:) = amps.*(0.9*R1STPU_1 - X1SPU_1*sind(acosd(0.9))*100);
-    I(4,:) = amps.*(0.95*R1STPU_1 - X1SPU_1*sind(acosd(0.95))*100);
-
-    % Plotagem da regulação de tensão
-    figure('Name','Regulação de tensao para carregamentos resistivo-capacitivos','NumberTitle','off','Position',[500 100 800 600])
-    plot(amps,I(1,:),'b');
-    hold on;
-    plot(amps,I(2,:),'k');
-    plot(amps,I(3,:),'r');
-    plot(amps,I(4,:),'m');
-
-    grid on;
-    title ('Regulação de Tensão Versus Carga (resistivo-capacitivo)');
-    xlabel ('Caregamento(A)');
-    ylabel ('Regulação de Tensão (%)');
-    legend({'FP 0,8 adiantado','FP 0,85 adiantado','FP 0,9 adiantado', 'FP 0,95 adiantado'},'Location','best');
-    hold off;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 6 %
 
@@ -206,7 +186,7 @@ IPU_1 = 0:0.05:1
 
 RegPU_1_1 = IPU_1.*R1STPU_1
 
-figure
+subplot(2,2,3)
 plot(IPU_1,RegPU_1_1)
 grid on
 title('Regulação de tensão | Carga resistiva')
