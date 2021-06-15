@@ -226,4 +226,4 @@ RendMPC_1_1 = (1.*IMAX_1*fp(1)*SN_1)./(1.*IMAX_1*fp(1)*SN_1 + P0_1 + R1STPU_1.*I
 RendMPC_1_2 = (1.*IMAX_1*fp(2)*SN_1)./(1.*IMAX_1*fp(2)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
 RendMPC_1_3 = (1.*IMAX_1*fp(3)*SN_1)./(1.*IMAX_1*fp(3)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
 RendMPC_1_4 = (1.*IMAX_1*fp(4)*SN_1)./(1.*IMAX_1*fp(4)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
-RendMPC_1_5 = (1.*IMAX_1*SN_1)./(1.*IMAX_1*SN_1 + P0_1*SN_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
+RendMPC_1_5 = (1.*IMAX_1*SN_1)./(1.*IMAX_1*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
