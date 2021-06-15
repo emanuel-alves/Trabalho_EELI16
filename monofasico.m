@@ -193,3 +193,30 @@ title('Regulação de tensão | Carga resistiva')
 ylabel('Reg_{PU}')
 xlabel('I_{PU}')
 legend('fp = 1')
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 7 %
+
+fp = [0.8 0.85 0.9 0.95]
+
+IPU_1 = 0:0.05:1
+
+RendPC_1_1 = (1.*IPU_1*fp(1)*SN_1)./(1.*IPU_1*fp(1)*SN_1 + P0_1 + R2APU_1.*IPU_1.^2*SN_1)*100
+RendPC_1_2 = (1.*IPU_1*fp(2)*SN_1)./(1.*IPU_1*fp(2)*SN_1 + P0_1 + R2APU_1.*IPU_1.^2*SN_1)*100
+RendPC_1_3 = (1.*IPU_1*fp(3)*SN_1)./(1.*IPU_1*fp(3)*SN_1 + P0_1 + R2APU_1.*IPU_1.^2*SN_1)*100
+RendPC_1_4 = (1.*IPU_1*fp(4)*SN_1)./(1.*IPU_1*fp(4)*SN_1 + P0_1 + R2APU_1.*IPU_1.^2*SN_1)*100
+RendPC_1_5 = (1.*IPU_1*SN_1)./(1.*IPU_1*SN_1 + P0_1 + R2APU_1.*IPU_1.^2*SN_1)*100
+ 
+subplot(2,2,4)
+plot(IPU_1,RendPC_1_1,IPU_1,RendPC_1_2,IPU_1,RendPC_1_3,IPU_1,RendPC_1_4,IPU_1,RendPC_1_5)
+grid on
+title('Regulação de tensão | Carga capacitiva-resistiva')
+ylabel('Reg_{PU}')
+xlabel('I_{PU}')
+legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado','fp = 1')
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Topico 8 %
+
+IMAX_1 = sqrt(P0_1/Pcc_1)
