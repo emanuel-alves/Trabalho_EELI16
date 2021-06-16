@@ -1,7 +1,7 @@
 function [OhmFig1, OhmFig2, OhmFig3, PuFig1, PuFig2, PuFig3, CompOhmPu, IMAX, RendMPC] = tranformador_trifasico(SN_3, VNAT_3, VNBT_3, V0_3, I0_3, P0_3, Vcc_3, Icc_3, Pcc_3,  isPlot, isSalve, pathSave)
 
 if isSalve
-    pathSave = uigetdir('','Selecione o diretório para salvar os dados');
+    pathSave = uigetdir('','Selecione o diretorio para salvar os dados');
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -213,7 +213,7 @@ if isPlot
     subplot(2,2,1)
     plot(IPU_3,RegPU_I3_1,IPU_3,RegPU_I3_2,IPU_3,RegPU_I3_3,IPU_3,RegPU_I3_4)
     grid on
-    title('Regulação de tensão | Carga indutiva-resistiva')
+    title('Regulacao de tensao | Carga indutiva-resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
@@ -222,7 +222,7 @@ if isPlot
     subplot(2,2,2)
     plot(IPU_3,RegPU_C3_1,IPU_3,RegPU_C3_2,IPU_3,RegPU_C3_3,IPU_3,RegPU_C3_4)
     grid on
-    title('Regulação de tensão | Carga capacitiva-resistiva')
+    title('Regulacao de tensao | Carga capacitiva-resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
@@ -231,7 +231,7 @@ if isPlot
     subplot(2,2,3)
     plot(IPU_3,RegPU_R3_1)
     grid on
-    title('Regulação de tensão | Carga resistiva')
+    title('Regulacao de tensao | Carga resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 1')
@@ -241,7 +241,7 @@ if isPlot
     subplot(2,2,4)
     plot(IPU_3,RendPC_3_1,IPU_3,RendPC_3_2,IPU_3,RendPC_3_3,IPU_3,RendPC_3_4,IPU_3,RendPC_3_5)
     grid on
-    title('Rendimento em função do carregamento | Carga indutiva-resistiva')
+    title('Rendimento em funcao do carregamento | Carga indutiva-resistiva')
     ylabel('Rendimento (%)')
     xlabel('I_{PU}')
     axis([0 1 97 100])
@@ -253,7 +253,7 @@ if isSalve
     f = figure('visible','off');
     plot(IPU_3,RegPU_I3_1,IPU_3,RegPU_I3_2,IPU_3,RegPU_I3_3,IPU_3,RegPU_I3_4)
     grid on
-    title('Regulação de tensão | Carga indutiva-resistiva')
+    title('Regulacao de tensao | Carga indutiva-resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
@@ -263,7 +263,7 @@ if isSalve
     f = figure('visible','off');
     plot(IPU_3,RegPU_C3_1,IPU_3,RegPU_C3_2,IPU_3,RegPU_C3_3,IPU_3,RegPU_C3_4)
     grid on
-    title('Regulação de tensão | Carga capacitiva-resistiva')
+    title('Regulacao de tensao | Carga capacitiva-resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
@@ -273,7 +273,7 @@ if isSalve
     f = figure('visible','off');
     plot(IPU_3,RegPU_R3_1)
     grid on
-    title('Regulação de tensão | Carga resistiva')
+    title('Regulacao de tensao | Carga resistiva')
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 1')
@@ -283,7 +283,7 @@ if isSalve
     f = figure('visible','off');
     plot(IPU_3,RendPC_3_1,IPU_3,RendPC_3_2,IPU_3,RendPC_3_3,IPU_3,RendPC_3_4,IPU_3,RendPC_3_5)
     grid on
-    title('Rendimento em função do carregamento | Carga indutiva-resistiva')
+    title('Rendimento em funcao do carregamento | Carga indutiva-resistiva')
     ylabel('Rendimento (%)')
     xlabel('I_{PU}')
     axis([0 1 97 100])
