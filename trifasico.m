@@ -40,32 +40,41 @@ X1_3 = X1S_3/2
 a = (VNAT_3/VNBT_3)
 
 % Referindo ao lado de alta
-RMA_3 = a^2*RM_3
-XMA_3 = a^2*XM_3
+RMA_3 = a^2*RM_3 % Output
+XMA_3 = a^2*XM_3 % Output
+R2A_3 = R1TS_3/2 % Output
+X2A_3 = X1S_3/2 % Output
+R1_3 = R1TS_3/2 % Output
+X1_3 = X1S_3/2 % Output
 
 % Referindo ao lado de baixa
-R1B_3 = R1_3/a^2
-X1B_3 = X1_3/a^2
-R2_3 = R2A_3/a^2
-X2_3 = X2A_3/a^2
+R1B_3 = R1_3/a^2 % Output
+X1B_3 = X1_3/a^2 % Output
+R2_3 = R2A_3/a^2 % Output
+X2_3 = X2A_3/a^2 % Output
+RM_3 % Output
+XM_3 % Output
+
+% Figura 2
 
 % Referindo ao lado de alta
-RMA_3
-XMA_3
-R1S_3
-X1S_3
+RMA_3 % Output
+XMA_3 % Output
+R1TS_3 % Output
+X1S_3 % Output
+
 
 % Referindo ao lado de baixa
-RM_3
-XM_3
-R1SB_3 = R1S_3/a^2
-X1SB_3 = X1S_3/a^2
+RM_3 % Output
+XM_3 % Output
+R1SB_3 = R1TS_3/a^2 % Output
+X1SB_3 = X1S_3/a^2 % Output
 
 %Figura 3%
 
 % Referindo ao lado de alta
-R1S_3
-X1S_3
+R1TS_3 % Output
+X1S_3 % Output
 
 % Referindo ao lado de baixa
 R1SB_3
@@ -95,35 +104,40 @@ Z1STPC_3 = Z1STPU_3*100
 
 %Figura 1%
 
-R2APU_3 = R1STPU_3/2
-X2APU_3 = X1SPU_3/2
-R1PU_3 = R1STPU_3/2
-X1PU_3 = X1SPU_3/2
-RMPU_3
-XMPU_3
+R2APU_3 = R1STPU_3/2 % Output
+X2APU_3 = X1SPU_3/2 % Output
+R1PU_3 = R1STPU_3/2 % Output
+X1PU_3 = X1SPU_3/2 % Output
+RMPU_3 % Output
+XMPU_3 % Output
 
 %Figura 2%
 
-R1STPU_3
-X1SPU_3
-RMPU_3
-XMPU_3
+R1STPU_3 % Output
+X1SPU_3 % Output
+RMPU_3 % Output
+XMPU_3 % Output
 
 %Figura 3%
 
-R1STPU_3
-X1SPU_3
+R1STPU_3 % Output
+X1SPU_3 % Output
 
-% Comparando com o topico b
+% Comparando com o topico b | Imprimir aos pares comparando
+% PU do ohmico
+% PU direto
 fprintf("Comparando")
-RMPUB_3 = RM_3/(((V0_3)^2)/SN_3)
-RMPU_3
-XMPUB_3 = XM_3/(((V0_3)^2)/SN_3)
-XMPU_3
-R1TSPUB_3 = R1TS_3/(VNAT_3^2/SN_3)
-R1STPU_3
-X1SPUB_3 = X1S_3/(VNAT_3^2/SN_3)
-X1SPU_3
+RMPUB_3 = RM_3/(((V0_3)^2)/SN_3) % Output
+RMPU_3 % Output
+
+XMPUB_3 = XM_3/(((V0_3)^2)/SN_3) % Output
+XMPU_3 % Output
+
+R1TSPUB_3 = R1TS_3/(VNAT_3^2/SN_3) % Output
+R1STPU_3 % Output
+
+X1SPUB_3 = X1S_3/(VNAT_3^2/SN_3) % Output
+X1SPU_3 % Output
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 4 %
@@ -157,7 +171,6 @@ fp = [0.8 0.85 0.9 0.95]
 phi = acos(fp)
 
 IPU_3 = 0:0.05:1
-
 
 RegPU_3_1 = IPU_3.*(cos(phi(1))*R1STPU_3 - sin(phi(1))*X1SPU_3)
 RegPU_3_2 = IPU_3.*(cos(phi(2))*R1STPU_3 - sin(phi(2))*X1SPU_3)
@@ -217,10 +230,12 @@ legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.9
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 8 %
 
-IMAX_3 = sqrt(P0_3/Pcc_3)
+IMAX_3 = sqrt(P0_3/Pcc_3)  % Output
 
-RendMPC_3_1 = (1.*IMAX_3*fp(1)*SN_3)./(1.*IMAX_3*fp(1)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
-RendMPC_3_2 = (1.*IMAX_3*fp(2)*SN_3)./(1.*IMAX_3*fp(2)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
-RendMPC_3_3 = (1.*IMAX_3*fp(3)*SN_3)./(1.*IMAX_3*fp(3)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
-RendMPC_3_4 = (1.*IMAX_3*fp(4)*SN_3)./(1.*IMAX_3*fp(4)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
-RendMPC_3_5 = (1.*IMAX_3*SN_3)./(1.*IMAX_3*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
+% Rendimento máximo para fp = [0.8 0.85 0.9 0.95 1] respectivamente
+
+RendMPC_3_1 = (1.*IMAX_3*fp(1)*SN_3)./(1.*IMAX_3*fp(1)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100 % Output
+RendMPC_3_2 = (1.*IMAX_3*fp(2)*SN_3)./(1.*IMAX_3*fp(2)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100 % Output
+RendMPC_3_3 = (1.*IMAX_3*fp(3)*SN_3)./(1.*IMAX_3*fp(3)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100 % Output
+RendMPC_3_4 = (1.*IMAX_3*fp(4)*SN_3)./(1.*IMAX_3*fp(4)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100 % Output
+RendMPC_3_5 = (1.*IMAX_3*SN_3)./(1.*IMAX_3*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100 % Output

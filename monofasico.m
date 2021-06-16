@@ -16,7 +16,7 @@ P0_1 = 75
 Vcc_1	= 320.16
 Icc_1 = 1.12
 Pcc_1 = 243.23
-T_1 = 75 % nao dado
+T_1 = 75
 
 								
 % Topico 2 %
@@ -42,38 +42,44 @@ X1_1 = X1S_1/2
 a = (VNAT_1/VNBT_1)
 
 % Referindo ao lado de alta
-RMA_1 = a^2*RM_1
-XMA_1 = a^2*XM_1
+RMA_1 = a^2*RM_1  % Output
+XMA_1 = a^2*XM_1 % Output
+R2A_1 = R1TS_1/2 % Output
+X2A_1 = X1S_1/2 % Output
+R1_1 = R1TS_1/2 % Output
+X1_1 = X1S_1/2 % Output
 
 % Referindo ao lado de baixa
-R1B_1 = R1_1/a^2
-X1B_1 = X1_1/a^2
-R2_1 = R2A_1/a^2
-X2_1 = X2A_1/a^2
+R1B_1 = R1_1/a^2 % Output
+X1B_1 = X1_1/a^2 % Output
+R2_1 = R2A_1/a^2 % Output
+X2_1 = X2A_1/a^2 % Output
+RM_1 % Output
+XM_1 % Output
 
 %Figura 2%
 
 % Referindo ao lado de alta
-RMA_1
-XMA_1
-R1TS_1
-X1S_1
+RMA_1 % Output
+XMA_1 % Output
+R1TS_1 % Output
+X1S_1 % Output
 
 % Referindo ao lado de baixa
-RM_1
-XM_1
-R1SB_1 = R1TS_1/a^2
-X1SB_1 = X1S_1/a^2
+RM_1 % Output
+XM_1 % Output
+R1SB_1 = R1TS_1/a^2 % Output
+X1SB_1 = X1S_1/a^2 % Output
 
 %Figura 3%
 
 % Referindo ao lado de alta
-R1TS_1
-X1S_1
+R1TS_1 % Output
+X1S_1 % Output
 
 % Referindo ao lado de baixa
-R1SB_1
-X1SB_1
+R1SB_1 % Output
+X1SB_1 % Output
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -97,35 +103,42 @@ R1STPC_1 = R1STPU_1*100
 Z1STPU_1 = sqrt(R1STPU_1^2 + X1SPU_1^2)
 Z1STPC_1 = Z1STPU_1*100
 
-R2APU_1 = R1STPU_1/2
-X2APU_1 = X1SPU_1/2
-R1PU_1 = R1STPU_1/2
-X1PU_1 = X1SPU_1/2
+RMPU_1 % Output
+XMPU_1 % Output
+R2APU_1 = R1STPU_1/2 % Output
+X2APU_1 = X1SPU_1/2 % Output
+R1PU_1 = R1STPU_1/2 % Output
+X1PU_1 = X1SPU_1/2 % Output
 
 
 %Figura 2%
 
-R1STPU_1
-X1SPU_1
-RMPU_1
-XMPU_1
+R1STPU_1 % Output
+X1SPU_1 % Output
+RMPU_1 % Output
+XMPU_1 % Output
 
 %Figura 3%
 
-R1STPU_1
-X1SPU_1
+R1STPU_1 % Output
+X1SPU_1 % Output
 
 
-% Comparando com o topico b
+% Comparando com o topico b | Imprimir aos pares comparando
+% PU do ohmico
+% PU direto
 
-RMPUB_1 = RM_1/(VNBT_1^2/SN_1)
-RMPU_1
-XMPUB_1 = XM_1/(VNBT_1^2/SN_1)
-XMPU_1
-R1TSPUB_1 = R1TS_1/(VNAT_1^2/SN_1)
-R1STPU_1
-X1SPUB_1 = X1S_1/(VNAT_1^2/SN_1)
-X1SPU_1
+RMPUB_1 = RM_1/(VNBT_1^2/SN_1) % Output
+RMPU_1 % Output
+
+XMPUB_1 = XM_1/(VNBT_1^2/SN_1) % Output
+XMPU_1 % Output
+
+R1TSPUB_1 = R1TS_1/(VNAT_1^2/SN_1) % Output
+R1STPU_1 % Output
+
+X1SPUB_1 = X1S_1/(VNAT_1^2/SN_1) % Output
+X1SPU_1 % Output
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -220,10 +233,12 @@ legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.9
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 8 %
 
-IMAX_1 = sqrt(P0_1/Pcc_1)
+IMAX_1 = sqrt(P0_1/Pcc_1)  % Output
 
-RendMPC_1_1 = (1.*IMAX_1*fp(1)*SN_1)./(1.*IMAX_1*fp(1)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
-RendMPC_1_2 = (1.*IMAX_1*fp(2)*SN_1)./(1.*IMAX_1*fp(2)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
-RendMPC_1_3 = (1.*IMAX_1*fp(3)*SN_1)./(1.*IMAX_1*fp(3)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
-RendMPC_1_4 = (1.*IMAX_1*fp(4)*SN_1)./(1.*IMAX_1*fp(4)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
-RendMPC_1_5 = (1.*IMAX_1*SN_1)./(1.*IMAX_1*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
+% Rendimento máximo para fp = [0.8 0.85 0.9 0.95 1] respectivamente
+
+RendMPC_1_1 = (1.*IMAX_1*fp(1)*SN_1)./(1.*IMAX_1*fp(1)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100  % Output
+RendMPC_1_2 = (1.*IMAX_1*fp(2)*SN_1)./(1.*IMAX_1*fp(2)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100  % Output
+RendMPC_1_3 = (1.*IMAX_1*fp(3)*SN_1)./(1.*IMAX_1*fp(3)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100  % Output
+RendMPC_1_4 = (1.*IMAX_1*fp(4)*SN_1)./(1.*IMAX_1*fp(4)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100  % Output
+RendMPC_1_5 = (1.*IMAX_1*SN_1)./(1.*IMAX_1*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100  % Output
