@@ -1,4 +1,4 @@
-function [fig1, fig2, fig3, IMAX, RendMPC, CompRend] = tranformador_monofasico(SN_1,VNAT_1,VNBT_1,V0_1,I0_1,P0_1,Vcc_1,Icc_1,Pcc_1, isPlot, isSalve)
+function [OhmFig1, OhmFig2, OhmFig3, PuFig1, PuFig2, PuFig3, CompOhmPu, IMAX, RendMPC, CompRend] = tranformador_monofasico(SN_1,VNAT_1,VNBT_1,V0_1,I0_1,P0_1,Vcc_1,Icc_1,Pcc_1, isPlot, isSalve)
 T_1 = 75 % nao dado
 
 if isSalve
@@ -77,10 +77,9 @@ R1SB_1 % Output
 X1SB_1 % Output
 
 % Output
-fig1 = [RMA_1, XMA_1, R1B_1, X1B_1, R2_1, X2_1]
-fig2 = [RMA_1, XMA_1, R1TS_1, X1S_1, RM_1, XM_1, R1SB_1, X1SB_1]
-fig3 = [R1S_1, X1S_1, R1SB_1, X1SB_1]
-
+OhmFig1 = [RMA_1, XMA_1, R2A_1, X2A_1, R1_1, X1_1, R1B_1, X1B_1, R2_1, X2_1, RM_1, XM_1];
+OhmFig2 = [RMA_1, XMA_1, R1TS_1, X1S_1, RM_1, XM_1, R1SB_1, X1SB_1];
+OhmFig3 = [R1TS_1, X1S_1, R1SB_1, X1SB_1];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 3 %
 %Figura 1%
@@ -131,10 +130,12 @@ R1STPU_1
 X1SPUB_1 = X1S_1/(VNAT_1^2/SN_1)
 X1SPU_1
 
+
 % Output
-fig1 = [fig1, R2APU_1, X2APU_1, R1PU_1, X1PU_1]
-fig2 = [fig2, R1STPU_1, X1SPU_1, RMPU_1 , XMPU_1]
-fig3 = [fig3, R1STPU_1 X1SPU_1]
+PuFig1 = [RMPU_1, XMPU_1, R2APU_1, X2APU_1, R1PU_1, X1PU_1];
+PuFig2 = [R1STPU_1, X1SPU_1, RMPU_1, XMPU_1];
+PuFig3 = [R1STPU_1, X1SPU_1];
+CompOhmPu = [RMPUB_1, RMPU_1, XMPUB_1, XMPU_1, R1TSPUB_1, R1STPU_1, X1SPUB_1, X1SPU_1];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 4 %
