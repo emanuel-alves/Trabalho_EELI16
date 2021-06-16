@@ -1,20 +1,20 @@
 function transformador_calc_cli()
     
 fprintf("\n\nCalculadora de parametros para transformadores...\n\n")
-
-NFases  = input('Tipo do Tranformador [Monofasico(0)/Trifasico(1)]: ');
-Sn      = input('Potencia Nominal [KVA]: ');
-VNAT    = input('Tensão nominal em alta [V]: ');
-VNBT    = input('Tensão nominal em baixa [V]: ');
-V0      = input('Tensão do ensaio em vazio [V: ');
-I0      = input('Corrente do ensaio em vazio [A]: ');
-P0      = input('Potencia do ensaio em vazio [W]: ');
-Vcc     = input('Tensão do ensaio de Curto Circuito [V]:');
-Icc     = input('Corrente do ensaio de Curto Circuito [A]:');
-Pcc     = input('Potencia do ensaio de Curto Circuito [W]:');
-SalvePlot = input('Deseja salvar os Grificos [s(1)/n(0)]?');
-
-    
+%{
+NFases  = 0 %input('Tipo do Tranformador [Monofasico(0)/Trifasico(1)]: ');
+Sn      = 45 %input('Potencia Nominal [KVA]: ');
+VNAT    = 23100 %input('Tensão nominal em alta [V]: ');
+VNBT    = 380 %input('Tensão nominal em baixa [V]: ');
+V0      = 380 %input('Tensão do ensaio em vazio [V]: ');
+I0      = 2.46 %input('Corrente do ensaio em vazio [A]: ');
+P0      = 215 %input('Potencia do ensaio em vazio [W]: ');
+Vcc     = 900.90 %input('Tensão do ensaio de Curto Circuito [V]:');
+Icc     = 1.12 % input('Corrente do ensaio de Curto Circuito [A]:');
+Pcc     = 704.52 %input('Potencia do ensaio de Curto Circuito [W]:');
+SalvePlot = 0 %input('Deseja salvar os Grificos [s(1)/n(0)]?');
+%}
+Sn = Sn*1e3;
 
 if NFases
     [OhmFig1, OhmFig2, OhmFig3, PuFig1, PuFig2, PuFig3, CompOhmPu, IMAX, RendMPC] =tranformador_trifasico( Sn, VNAT, VNBT, V0,I0, P0, Vcc, Icc, Pcc, 1, SalvePlot);
@@ -22,8 +22,7 @@ else
     [OhmFig1, OhmFig2, OhmFig3, PuFig1, PuFig2, PuFig3, CompOhmPu, IMAX, RendMPC] =tranformador_monofasico( Sn, VNAT, VNBT, V0,I0, P0, Vcc, Icc, Pcc, 1, SalvePlot);
 end
 
-
-
+%clc
 
 fprintf("\n\n_______________________________________")
 fprintf("\nSimulacao:")

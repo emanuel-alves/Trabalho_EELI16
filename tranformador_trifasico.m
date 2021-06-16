@@ -4,18 +4,6 @@ if isSalve
     pathSave = uigetdir('','Selecione o diretorio para salvar os dados');
 end
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-SN_3 = 45e3;
-VNAT_3 = 23.1e3;
-VNBT_3 = 380;
-V0_3 = 380;
-I0_3 = 2.46;
-P0_3 = 215;
-Vcc_3	= 900.90;
-Icc_3 = 1.12;
-Pcc_3 = 704.52;
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 T_3 = 75; % nao dado
 
 % Topico 2 %
@@ -208,7 +196,7 @@ RendMPC = [RendMPC_3_1, RendMPC_3_2, RendMPC_3_3, RendMPC_3_4, RendMPC_3_5];
 IMAX = IMAX_3;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Graficos%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if isPlot
-    figure('units','normalized','outerposition',[0 0 1 1]);
+    figure('WindowState','maximize');
     % Topico 4
     subplot(2,2,1)
     plot(IPU_3,RegPU_I3_1,IPU_3,RegPU_I3_2,IPU_3,RegPU_I3_3,IPU_3,RegPU_I3_4)
