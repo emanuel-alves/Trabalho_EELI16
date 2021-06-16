@@ -1,9 +1,10 @@
-function [saidas] = tranformador_trifasico(SN_3, VNAT_3, VNBT_3, V0_3, I0_3, P0_3, Vcc_3, Icc_3, Pcc_3,  isPlot, isSalve, pathSave)
+function [fig1, fig2, fig3, IMAX, RendMPC, CompRend] = tranformador_trifasico(SN_3, VNAT_3, VNBT_3, V0_3, I0_3, P0_3, Vcc_3, Icc_3, Pcc_3,  isPlot, isSalve, pathSave)
 
 if isSalve
     pathSave = uigetdir('','Selecione o diretório para salvar os dados');
 end
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 SN_3 = 45e3
 VNAT_3 = 23.1e3
 VNBT_3 = 380
@@ -13,6 +14,8 @@ P0_3 = 215
 Vcc_3	= 900.90
 Icc_3 = 1.12
 Pcc_3 = 704.52
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 T_3 = 75 % nao dado
 
 % Topico 2 %
@@ -69,7 +72,11 @@ X1S_3
 R1SB_3
 X1SB_3
 
+% Output
 
+fig1 = [RMA_3, XMA_3, R1B_3, X1B_3, R2_3, X2_3]
+fig2 = [RMA_3, XMA_3, R1TS_3, X1S_3, RM_3, XM_3, R1SB_3, X1SB_3]
+fig3 = [R1S_3, X1S_3, R1SB_3, X1SB_3]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 3 %
 %Figura 1%
@@ -123,6 +130,10 @@ R1STPU_3
 X1SPUB_3 = X1S_3/(VNAT_3^2/SN_3)
 X1SPU_3
 
+% Output
+fig1 = [fig1, R2APU_3, X2APU_3, R1PU_3, X1PU_3]
+fig2 = [fig2, R1STPU_3, X1SPU_3, RMPU_3 , XMPU_3]
+fig3 = [fig3, R1STPU_3 X1SPU_3]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 4 %
 
@@ -187,7 +198,16 @@ RendMPC_3_3 = (1.*IMAX_3*fp(3)*SN_3)./(1.*IMAX_3*fp(3)*SN_3 + P0_3 + R1STPU_3.*I
 RendMPC_3_4 = (1.*IMAX_3*fp(4)*SN_3)./(1.*IMAX_3*fp(4)*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
 RendMPC_3_5 = (1.*IMAX_3*SN_3)./(1.*IMAX_3*SN_3 + P0_3 + R1STPU_3.*IMAX_3.^2*SN_3)*100
 
+CompRend_3_1 = RendMPC_3_1 - RendPC_3_1(end);
+CompRend_3_2 = RendMPC_3_2 - RendPC_3_2(end);
+CompRend_3_3 = RendMPC_3_3 - RendPC_3_3(end);
+CompRend_3_4 = RendMPC_3_4 - RendPC_3_4(end);
+CompRend_3_5 = RendMPC_3_5 - RendPC_3_5(end);
 
+% Output
+RendMPC = [RendMPC_3_1, RendMPC_3_2, RendMPC_3_3, RendMPC_3_4, RendMPC_3_5];
+CompRend = [CompRend_3_1, CompRend_3_2, CompRend_3_3, CompRend_3_4, CompRend_3_5]
+IMAX = IMAX_3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Graficos%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if isPlot
     figure('units','normalized','outerposition',[0 0 1 1]);
@@ -239,7 +259,7 @@ if isSalve
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
-    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoIndutivaResitiva'),'png')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoIndutivaResitiva'),'svg')
     
     % Topico 5
     f = figure('visible','off');
@@ -249,7 +269,7 @@ if isSalve
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
-    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoCapacitivaResitiva'),'png')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoCapacitivaResitiva'),'svg')
     
     % Topico 6
     f = figure('visible','off');
@@ -259,7 +279,7 @@ if isSalve
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 1')
-    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoResitiva'),'png')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoResitiva'),'svg')
     
     % Topico 7
     f = figure('visible','off');
@@ -270,7 +290,7 @@ if isSalve
     xlabel('I_{PU}')
     axis([0 1 97 100])
     legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado','fp = 1')
-    saveas(f,  fullfile(pathSave, 'plotTrifasico_rendimentoIndutivaResistiva'),'png')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_rendimentoIndutivaResistiva'),'svg')
     
 end
 end

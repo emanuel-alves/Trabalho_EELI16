@@ -1,10 +1,11 @@
-function [saidas] = tranformador_monofasico(SN_1,VNAT_1,VNBT_1,V0_1,I0_1,P0_1,Vcc_1,Icc_1,Pcc_1, isPlot, isSalve)
+function [fig1, fig2, fig3, IMAX, RendMPC, CompRend] = tranformador_monofasico(SN_1,VNAT_1,VNBT_1,V0_1,I0_1,P0_1,Vcc_1,Icc_1,Pcc_1, isPlot, isSalve)
 T_1 = 75 % nao dado
 
 if isSalve
     pathSave = uigetdir('','Selecione o diretório para salvar os dados');
 end
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 SN_1 = 15e3;
 VNAT_1 = 13.34e3;
 VNBT_1 = 220;
@@ -14,6 +15,7 @@ P0_1 = 75;
 Vcc_1	= 320.16;
 Icc_1 = 1.12;
 Pcc_1 = 243.23;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 T_1 = 75 ;% nao dado
 
@@ -41,48 +43,52 @@ X1_1 = X1S_1/2
 a = (VNAT_1/VNBT_1)
 
 % Referindo ao lado de alta
-RMA_1 = a^2*RM_1
-XMA_1 = a^2*XM_1
+RMA_1 = a^2*RM_1 % Output
+XMA_1 = a^2*XM_1 % Output
 
 % Referindo ao lado de baixa
-R1B_1 = R1_1/a^2
-X1B_1 = X1_1/a^2
-R2_1 = R2A_1/a^2
-X2_1 = X2A_1/a^2
+R1B_1 = R1_1/a^2 % Output
+X1B_1 = X1_1/a^2 % Output
+R2_1 = R2A_1/a^2 % Output
+X2_1 = X2A_1/a^2 % Output
 
 %Figura 2%
 
 % Referindo ao lado de alta
-RMA_1
-XMA_1
-R1TS_1
-X1S_1
+RMA_1 % Output
+XMA_1 % Output
+R1TS_1 % Output
+X1S_1 % Output
 
 % Referindo ao lado de baixa
-RM_1
-XM_1
-R1SB_1 = R1TS_1/a^2
-X1SB_1 = X1S_1/a^2
+RM_1 % Output
+XM_1 % Output
+R1SB_1 = R1TS_1/a^2 % Output
+X1SB_1 = X1S_1/a^2 % Output
 
 %Figura 3%
 
 % Referindo ao lado de alta
-R1TS_1
-X1S_1
+R1TS_1 % Output
+X1S_1 % Output
 
 % Referindo ao lado de baixa
-R1SB_1
-X1SB_1
+R1SB_1 % Output
+X1SB_1 % Output
 
+% Output
+fig1 = [RMA_1, XMA_1, R1B_1, X1B_1, R2_1, X2_1]
+fig2 = [RMA_1, XMA_1, R1TS_1, X1S_1, RM_1, XM_1, R1SB_1, X1SB_1]
+fig3 = [R1S_1, X1S_1, R1SB_1, X1SB_1]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 3 %
 %Figura 1%
 
-RMPU_1 = SN_1/P0_1
+RMPU_1 = SN_1/P0_1 % Output
 RMPC_1 = RMPU_1*100
 Q0_1 = sqrt((V0_1*I0_1)^2 - P0_1^2)
-XMPU_1 = SN_1/Q0_1
+XMPU_1 = SN_1/Q0_1 % Output
 XMPC_1 = XMPU_1*100
 
 R1SPU_1 = Pcc_1/SN_1
@@ -104,16 +110,15 @@ X1PU_1 = X1SPU_1/2
 
 %Figura 2%
 
-R1STPU_1
-X1SPU_1
-RMPU_1
-XMPU_1
+R1STPU_1 % Output
+X1SPU_1 % Output
+RMPU_1 % Output
+XMPU_1 % Output
 
 %Figura 3%
 
-R1STPU_1
-X1SPU_1
-
+R1STPU_1 % Output
+X1SPU_1 % Output
 
 % Comparando com o topico b
 
@@ -126,6 +131,10 @@ R1STPU_1
 X1SPUB_1 = X1S_1/(VNAT_1^2/SN_1)
 X1SPU_1
 
+% Output
+fig1 = [fig1, R2APU_1, X2APU_1, R1PU_1, X1PU_1]
+fig2 = [fig2, R1STPU_1, X1SPU_1, RMPU_1 , XMPU_1]
+fig3 = [fig3, R1STPU_1 X1SPU_1]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Topico 4 %
@@ -185,14 +194,25 @@ RendPC_1_5 = (1.*IPU_1*SN_1)./(1.*IPU_1*SN_1 + P0_1 + R1STPU_1.*IPU_1.^2*SN_1)*1
 
 IMAX_1 = sqrt(P0_1/Pcc_1)
 
-RendMPC_1_1 = (1.*IMAX_1*fp(1)*SN_1)./(1.*IMAX_1*fp(1)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
-RendMPC_1_2 = (1.*IMAX_1*fp(2)*SN_1)./(1.*IMAX_1*fp(2)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
-RendMPC_1_3 = (1.*IMAX_1*fp(3)*SN_1)./(1.*IMAX_1*fp(3)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
-RendMPC_1_4 = (1.*IMAX_1*fp(4)*SN_1)./(1.*IMAX_1*fp(4)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
-RendMPC_1_5 = (1.*IMAX_1*SN_1)./(1.*IMAX_1*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100
+RendMPC_1_1 = (1.*IMAX_1*fp(1)*SN_1)./(1.*IMAX_1*fp(1)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100;
+RendMPC_1_2 = (1.*IMAX_1*fp(2)*SN_1)./(1.*IMAX_1*fp(2)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100;
+RendMPC_1_3 = (1.*IMAX_1*fp(3)*SN_1)./(1.*IMAX_1*fp(3)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100;
+RendMPC_1_4 = (1.*IMAX_1*fp(4)*SN_1)./(1.*IMAX_1*fp(4)*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100;
+RendMPC_1_5 = (1.*IMAX_1*SN_1)./(1.*IMAX_1*SN_1 + P0_1 + R1STPU_1.*IMAX_1.^2*SN_1)*100;
+
+
+CompRend_1_1 = RendMPC_1_1 - RendPC_1_1(end);
+CompRend_1_2 = RendMPC_1_2 - RendPC_1_2(end);
+CompRend_1_3 = RendMPC_1_3 - RendPC_1_3(end);
+CompRend_1_4 = RendMPC_1_4 - RendPC_1_4(end);
+CompRend_1_5 = RendMPC_1_5 - RendPC_1_5(end);
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Output%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+RendMPC = [RendMPC_1_1, RendMPC_1_2, RendMPC_1_3, RendMPC_1_4, RendMPC_1_5];
+CompRend = [CompRend_1_1, CompRend_1_2, CompRend_1_3, CompRend_1_4, CompRend_1_5]
+IMAX = IMAX_1; 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Graficos%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if isPlot
     figure('units','normalized','outerposition',[0 0 1 1]);
@@ -243,7 +263,7 @@ if isSalve
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
-    saveas(f,  fullfile(pathSave, 'plotMonofasico_regulacaoIndutivaResitiva'),'png')
+    saveas(f,  fullfile(pathSave, 'plotMonofasico_regulacaoIndutivaResitiva'),'svg')
     
     % Topico 5
     f = figure('visible','off');
@@ -253,7 +273,7 @@ if isSalve
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
-    saveas(f,  fullfile(pathSave, 'plotMonofasico_regulacaoCapacitivaResitiva'),'png')
+    saveas(f,  fullfile(pathSave, 'plotMonofasico_regulacaoCapacitivaResitiva'),'svg')
     
     % Topico 6
     f = figure('visible','off');
@@ -263,7 +283,7 @@ if isSalve
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 1')
-    saveas(f,  fullfile(pathSave, 'plotMonofasico_regulacaoResitiva'),'png')
+    saveas(f,  fullfile(pathSave, 'plotMonofasico_regulacaoResitiva'),'svg')
     
     % Topico 7
     f = figure('visible','off');
@@ -273,7 +293,7 @@ if isSalve
     ylabel('\eta_%')
     xlabel('I_{PU}')
     axis([0 1 97 99])
-    saveas(f,  fullfile(pathSave, 'plotMonofasico_rendimentoIndutivaResistiva'),'png')
+    saveas(f,  fullfile(pathSave, 'plotMonofasico_rendimentoIndutivaResistiva'),'svg')
     
 end
 end
