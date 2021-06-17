@@ -245,7 +245,7 @@ if isSalve
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8 atrasado','fp = 0.85 atrasado','fp = 0.9 atrasado','fp = 0.95 atrasado')
-    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoIndutivaResitiva'),'svg')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoIndutivaResitiva'),'png')
     
     % Topico 5
     f = figure('visible','off');
@@ -255,7 +255,7 @@ if isSalve
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado')
-    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoCapacitivaResitiva'),'svg')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoCapacitivaResitiva'),'png')
     
     % Topico 6
     f = figure('visible','off');
@@ -265,7 +265,7 @@ if isSalve
     ylabel('Reg_{PU}')
     xlabel('I_{PU}')
     legend('fp = 1')
-    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoResitiva'),'svg')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_regulacaoResitiva'),'png')
     
     % Topico 7
     f = figure('visible','off');
@@ -276,7 +276,7 @@ if isSalve
     xlabel('I_{PU}')
     axis([0 1 97 100])
     legend('fp = 0.8 adiantado','fp = 0.85 adiantado','fp = 0.9 adiantado','fp = 0.95 adiantado','fp = 1')
-    saveas(f,  fullfile(pathSave, 'plotTrifasico_rendimentoIndutivaResistiva'),'svg')
+    saveas(f,  fullfile(pathSave, 'plotTrifasico_rendimentoIndutivaResistiva'),'png')
     
 end
 end
